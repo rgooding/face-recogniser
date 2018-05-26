@@ -28,6 +28,8 @@ def prepare_training_data(data_folder_path):
         label_names[label] = dir_name
 
         subject_dir = data_folder_path + "/" + dir_name
+        if not os.path.isdir(subject_dir):
+            continue
 
         # get the images names that are inside the given subject directory
         image_files = os.listdir(subject_dir)
