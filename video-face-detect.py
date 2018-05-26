@@ -1,12 +1,13 @@
 import cv2
 from lib import lib
+from lib import camthread
 
-capture = cv2.VideoCapture("http://10.9.0.120:8080/video")
+stream = camthread.VideoStream(src="http://10.9.0.120:8080/video").start()
 try:
     while True:
-        ok, image = capture.read()
-        if not ok:
-            break
+        image = stream.read()
+        if image is None:
+            continue
 
         face, rect, all_faces = lib.detect_faces(image)
 
@@ -29,5 +30,5 @@ try:
             break
     cv2.waitKey(0)
 finally:
-    capture.release()
+    stream.stop()
     cv2.destroyAllWindows()
