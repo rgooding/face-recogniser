@@ -4,7 +4,8 @@ from lib import camthread
 
 stream = camthread.VideoStream(src="http://10.9.0.120:8080/video").start()
 try:
-    while True:
+    quit_pressed = False
+    while not quit_pressed:
         image = stream.read()
         if image is None:
             continue
@@ -27,8 +28,9 @@ try:
         cv2.imshow("preview", image)
         k = cv2.waitKey(1) & 0xFF
         if k == ord("q"):
-            break
-    cv2.waitKey(0)
+            quit_pressed = True
+    if not quit_pressed:
+        cv2.waitKey(0)
 finally:
     stream.stop()
     cv2.destroyAllWindows()
