@@ -1,0 +1,1 @@
+face-recogniser.py will place unrecognised faces in this directory
