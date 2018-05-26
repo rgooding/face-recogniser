@@ -1,5 +1,6 @@
 from threading import Thread
 import cv2
+import time
 
 
 class VideoStream:
@@ -30,6 +31,9 @@ class VideoStream:
 
     def read(self):
         # return the frame most recently read
+        while not self.grabbed:
+            time.sleep(0.001)
+        self.grabbed = False
         return self.frame
 
     def stop(self):
