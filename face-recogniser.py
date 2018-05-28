@@ -97,10 +97,8 @@ def main():
 
                 if confidence <= max_confidence:
                     face_name = label_names[label]
-                    print("Detected face: %s" % face_name)
                 else:
                     face_name = "Unknown (%s)" % label_names[label]
-                    print("Detected unknown face")
                     save_unknown_face(image[y: y + w, x: x + h], unknown_faces_dir, label_names[label], confidence)
 
                 cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
